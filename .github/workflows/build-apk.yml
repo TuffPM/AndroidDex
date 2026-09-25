@@ -12,7 +12,7 @@ permissions:
 jobs:
   build:
     name: Build Android Dex
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 30
 
     steps:
@@ -40,7 +40,14 @@ jobs:
           sdkmanager "build-tools;35.0.0"
 
       - name: Build APK
-        run: gradle --no-daemon assembleDebug
+        run: |
+          chmod +x ./gradlew
+          ./gradlew --no-daemon assembleDebug
+
+      - name: Verify APK
+        run: |
+          echo "APK generado:"
+          find . -type f -name "*.apk" -print
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
