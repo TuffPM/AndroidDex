@@ -1,0 +1,1 @@
+GitHub Actions installs Android SDK/build-tools on the runner. Production signing should use GitHub Secrets.
